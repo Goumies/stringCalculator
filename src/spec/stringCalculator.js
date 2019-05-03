@@ -38,9 +38,8 @@ class StringCalculator {
 
     static add(numbers) {
         if (Utils.containsSeveralNumbersIn(numbers)) {
-            const intValueOfNumbers = (Utils.parseStringValuesToInt(numbers));
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            return intValueOfNumbers
+            return (Utils.parseStringValuesToInt(numbers))
                 .reduce(reducer);
         }
         if (Utils.containsOnlyASingleNumberIn(numbers))
