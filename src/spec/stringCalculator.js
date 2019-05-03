@@ -33,9 +33,7 @@ class StringCalculator {
 
     static add(numbers) {
         if (Utils.containsSeveralNumbersIn(numbers)) {
-
-            const intNumbers = Utils.intValueOf(Utils.getSplit(numbers));
-            return intNumbers
+            return Utils.intValueOf(Utils.getSplit(numbers))
                 .reduce((accumulator, currentValue) => accumulator + currentValue);
         }
         if (Utils.containsOnlyASingleNumberIn(numbers))
@@ -61,6 +59,6 @@ describe('Tests for stringCalculator', () => {
             (StringCalculator.add('2,2')).should.equal(4);
         });
 
-   });
+    });
 
 });
