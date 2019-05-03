@@ -20,7 +20,8 @@ class Utils {
     }
 
     static getSplit(numbers) {
-        return numbers.split(/[,\n]/);
+        return numbers.split('')
+            .filter(element => Number.isNaN(parseInt(element)) === false);
     }
 
     static parseStringValuesToInt(numbers) {
@@ -80,7 +81,7 @@ describe('Tests for stringCalculator', () => {
             array.forEach(element => stringBuilder += element);
             const numbers = stringBuilder;
 
-            (StringCalculator.add(numbers)).should.equal(Number.POSITIVE_INFINITY);
+            (StringCalculator.add(numbers)).should.equal(MAX_VALID_ARRAY_LENGTH);
         });
 
     });
@@ -89,6 +90,14 @@ describe('Tests for stringCalculator', () => {
 
         it('should return the sum, given comma and new line separator', () => {
             (StringCalculator.add('1\n2,3')).should.equal(6);
+        });
+
+    });
+
+    describe('Custom separators', () => {
+
+        it('should return the sum, given custom separators', () => {
+            (StringCalculator.add('//;\n1;2')).should.equal(3);
         });
 
     });
