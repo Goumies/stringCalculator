@@ -67,4 +67,12 @@ describe('Tests for stringCalculator', () => {
 
     });
 
+    describe('Arbitrary number size', () => {
+
+        it('should return the sum, given unknown amount of numbers', () => {
+            (StringCalculator.add('1,2,3,4,5,6,7,8,9')).should.equal(45);
+        });
+
+    });
+
 });
