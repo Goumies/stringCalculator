@@ -40,10 +40,6 @@ describe('Tests for isLeapYear method', () => {
             isleapYear(1984).should.equal(true);
         });
 
-    });
-
-    describe('a leap year', () => {
-
         it('should return true, given a year divisible by 400', () => {
             isleapYear(1600).should.equal(true);
             isleapYear(1904).should.equal(true);
