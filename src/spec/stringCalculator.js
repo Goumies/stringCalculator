@@ -73,6 +73,16 @@ describe('Tests for stringCalculator', () => {
             (StringCalculator.add('1,2,3,4,5,6,7,8,9')).should.equal(45);
         });
 
+        it('should return the sum, given unknown amount of numbers', () => {
+            let stringBuilder = '';
+            const MAX_VALID_ARRAY_LENGTH = (2 ** 20);
+            let array = Array(MAX_VALID_ARRAY_LENGTH).fill(1, 0, MAX_VALID_ARRAY_LENGTH);
+            array.forEach(element => stringBuilder += element);
+            const numbers = stringBuilder;
+
+            (StringCalculator.add(numbers)).should.equal(Number.POSITIVE_INFINITY);
+        });
+
     });
 
 });
