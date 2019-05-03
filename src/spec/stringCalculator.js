@@ -14,20 +14,30 @@ class Utils {
         return numbers.length > 1;
     }
 
+    static intValueOf(stringValuesOfNumbers) {
+        return stringValuesOfNumbers
+            .map(numberStringValue => parseInt(numberStringValue));
+    }
+
     static getSplit(numbers) {
         return numbers.split(',');
     }
 }
+
 
 class StringCalculator {
 
     constructor() {
 
     }
+
     static add(numbers) {
-        if (Utils.containsSeveralNumbersIn(numbers))
-            return Utils.getSplit(numbers)
-                .reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0);
+        if (Utils.containsSeveralNumbersIn(numbers)) {
+
+            const intNumbers = Utils.intValueOf(Utils.getSplit(numbers));
+            return intNumbers
+                .reduce((accumulator, currentValue) => accumulator + currentValue);
+        }
         if (Utils.containsOnlyASingleNumberIn(numbers))
             return parseInt(numbers);
         return numbers.length;
