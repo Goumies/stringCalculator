@@ -20,7 +20,7 @@ class Utils {
     }
 
     static getSplit(numbers) {
-        return numbers.split(',');
+        return numbers.split(/[,\n]/);
     }
 
     static parseStringValuesToInt(numbers) {
@@ -81,6 +81,14 @@ describe('Tests for stringCalculator', () => {
             const numbers = stringBuilder;
 
             (StringCalculator.add(numbers)).should.equal(Number.POSITIVE_INFINITY);
+        });
+
+    });
+
+    describe('Newline separator', () => {
+
+        it('should return the sum, given comma and new line separator', () => {
+            (StringCalculator.add('1\n2,3')).should.equal(6);
         });
 
     });
