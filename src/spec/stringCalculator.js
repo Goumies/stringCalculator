@@ -1,27 +1,37 @@
 const chai = require('chai');
 const should = chai.should();
 
-class StringCalculator {
+class Utils {
     constructor() {
 
     }
-
-    static add(numbers) {
-        if (StringCalculator.containsOnlySeveralNumbersIn(numbers))
-            return numbers.split(',')
-                .reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0);
-        if (StringCalculator.containsOnlyASingleNumberIn(numbers))
-            return parseInt(numbers);
-        return numbers.length;
-    };
 
     static containsOnlyASingleNumberIn(numbers) {
         return numbers.length === 1;
     }
 
-    static containsOnlySeveralNumbersIn(numbers) {
+    static containsSeveralNumbersIn(numbers) {
         return numbers.length > 1;
     }
+
+    static getSplit(numbers) {
+        return numbers.split(',');
+    }
+}
+
+class StringCalculator {
+
+    constructor() {
+
+    }
+    static add(numbers) {
+        if (Utils.containsSeveralNumbersIn(numbers))
+            return Utils.getSplit(numbers)
+                .reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0);
+        if (Utils.containsOnlyASingleNumberIn(numbers))
+            return parseInt(numbers);
+        return numbers.length;
+    };
 }
 
 describe('Tests for stringCalculator', () => {
