@@ -13,11 +13,8 @@ function isDivisibleByCenturies(year) {
     return year % LEAP_YEAR_DIVISIBLE_LONG_CYCLE === 0;
 }
 
-function isleapYear(year) {
-    if (isDivisibleByCenturies(year)) return true;
-    if (isDivisibleByYears(year)) return true;
-
-    return false;
+function isLeapYear(year) {
+    return isDivisibleByCenturies(year) || isDivisibleByYears(year);
 }
 
 describe('Tests for isLeapYear method', () => {
@@ -25,9 +22,9 @@ describe('Tests for isLeapYear method', () => {
    describe('not a leap year', () => {
 
        it('should return false, given a year not divisible by 4', () => {
-           isleapYear(2005).should.equal(false);
-           isleapYear(2001).should.equal(false);
-           isleapYear(1993).should.equal(false);
+           isLeapYear(2005).should.equal(false);
+           isLeapYear(2001).should.equal(false);
+           isLeapYear(1993).should.equal(false);
        });
 
    });
@@ -35,15 +32,15 @@ describe('Tests for isLeapYear method', () => {
     describe('a leap year', () => {
 
         it('should return true, given a year divisible by 4', () => {
-            isleapYear(2004).should.equal(true);
-            isleapYear(1904).should.equal(true);
-            isleapYear(1984).should.equal(true);
+            isLeapYear(2004).should.equal(true);
+            isLeapYear(1904).should.equal(true);
+            isLeapYear(1984).should.equal(true);
         });
 
         it('should return true, given a year divisible by 400', () => {
-            isleapYear(1600).should.equal(true);
-            isleapYear(1904).should.equal(true);
-            isleapYear(1984).should.equal(true);
+            isLeapYear(1600).should.equal(true);
+            isLeapYear(1904).should.equal(true);
+            isLeapYear(1984).should.equal(true);
         });
 
     });
