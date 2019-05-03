@@ -7,6 +7,9 @@ class StringCalculator {
     }
 
     static add(numbers) {
+        if (StringCalculator.containsOnlySeveralNumbersIn(numbers))
+            return numbers.split(',')
+                .reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0);
         if (StringCalculator.containsOnlyASingleNumberIn(numbers))
             return parseInt(numbers);
         return numbers.length;
@@ -14,6 +17,10 @@ class StringCalculator {
 
     static containsOnlyASingleNumberIn(numbers) {
         return numbers.length === 1;
+    }
+
+    static containsOnlySeveralNumbersIn(numbers) {
+        return numbers.length > 1;
     }
 }
 
@@ -27,6 +34,11 @@ describe('Tests for stringCalculator', () => {
 
         it('should return string value, given a single number', () => {
             (StringCalculator.add('4')).should.equal(4);
+        });
+
+        it('should return sum, given 2 numbers', () => {
+            (StringCalculator.add('1,2')).should.equal(3);
+            (StringCalculator.add('2,2')).should.equal(4);
         });
 
    });
