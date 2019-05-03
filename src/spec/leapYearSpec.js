@@ -13,8 +13,12 @@ function isDivisibleByCenturies(year) {
     return year % LEAP_YEAR_DIVISIBLE_LONG_CYCLE === 0;
 }
 
+function isDivisibleByCentury(year) {
+    return year % 100 === 0;
+}
+
 function isLeapYear(year) {
-    return isDivisibleByCenturies(year) || isDivisibleByYears(year);
+    return isDivisibleByYears(year) && !(isDivisibleByCentury(year) && !isDivisibleByCenturies(year));
 }
 
 describe('Tests for isLeapYear method', () => {
@@ -25,6 +29,11 @@ describe('Tests for isLeapYear method', () => {
            isLeapYear(2005).should.equal(false);
            isLeapYear(2001).should.equal(false);
            isLeapYear(1993).should.equal(false);
+       });
+
+       it('should return false, given a year divisible by 4 or 100 but not by 400', () => {
+           console.log(1800 % 400, 1800 % 4)
+           isLeapYear(1800).should.equal(false);
        });
 
    });
