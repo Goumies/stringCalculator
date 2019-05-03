@@ -7,9 +7,14 @@ class StringCalculator {
     }
 
     static add(numbers) {
-        if (numbers.length === 1) return parseInt(numbers);
+        if (StringCalculator.containsOnlyASingleNumberIn(numbers))
+            return parseInt(numbers);
         return numbers.length;
     };
+
+    static containsOnlyASingleNumberIn(numbers) {
+        return numbers.length === 1;
+    }
 }
 
 describe('Tests for stringCalculator', () => {
