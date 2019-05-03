@@ -22,7 +22,12 @@ class Utils {
     static getSplit(numbers) {
         return numbers.split(',');
     }
+
+    static parseStringValuesTo(numbers) {
+        Utils.intValueOf(Utils.getSplit(numbers));
+    }
 }
+
 
 
 class StringCalculator {
@@ -33,10 +38,11 @@ class StringCalculator {
 
     static add(numbers) {
         if (Utils.containsSeveralNumbersIn(numbers)) {
-            return Utils.intValueOf(Utils.getSplit(numbers))
-                .reduce((accumulator, currentValue) => accumulator + currentValue);
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            return Utils.parseStringValuesTo(numbers)
+                .reduce(reducer);
         }
-        if (Utils.containsOnlyASingleNumberIn(numbers))
+        if (Utils.containsOnlyASingleNumberIn(numbers)) N
             return parseInt(numbers);
         return numbers.length;
     };
