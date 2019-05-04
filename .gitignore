@@ -1,3 +1,5 @@
 .idea/
 leap-year-kata.iml
 node_modules/
+
+*.iml
