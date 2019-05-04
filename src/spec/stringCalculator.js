@@ -15,11 +15,26 @@ class Utils {
     }
 
     static intValueOf(stringValuesOfNumbers) {
-        return stringValuesOfNumbers
+        const intNumbers = stringValuesOfNumbers
             .map(numberStringValue => parseInt(numberStringValue));
+        let negativesNumbers = [];
+        intNumbers.forEach(intNumber => {
+            if (intNumber < 0) {
+                negativesNumbers.push(intNumber);
+            }
+        });
+
+        if (negativesNumbers.length > 0) {
+            throw `error: negatives not allowed: ${Object.values(negativesNumbers).toString()}`;
+        }
+        return intNumbers;
     }
 
     static getSplit(numbers) {
+        console.log(numbers);
+        if (numbers.includes('-'))
+            return numbers.split(',')
+                .filter(element => Number.isNaN(parseInt(element)) === false);
         return numbers.split('')
             .filter(element => Number.isNaN(parseInt(element)) === false);
     }
@@ -40,8 +55,13 @@ class StringCalculator {
     static add(numbers) {
         if (Utils.containsSeveralNumbersIn(numbers)) {
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            return (Utils.parseStringValuesToInt(numbers))
-                .reduce(reducer);
+            try {
+                const test = Utils.parseStringValuesToInt(numbers);
+                return (test)
+                    .reduce(reducer);
+            } catch (error) {
+                return error;
+            }
         }
         if (Utils.containsOnlyASingleNumberIn(numbers))
             return parseInt(numbers);
@@ -98,6 +118,14 @@ describe('Tests for stringCalculator', () => {
 
         it('should return the sum, given custom separators', () => {
             (StringCalculator.add('//;\n1;2')).should.equal(3);
+        });
+
+    });
+
+    describe('Disallow negatives', () => {
+
+        it('should throw an exception negatives not allowed, and the negative that was passed, given negative numbers', () => {
+            (StringCalculator.add('1,-2,-3')).should.equal('error: negatives not allowed: -2,-3');
         });
 
     });
